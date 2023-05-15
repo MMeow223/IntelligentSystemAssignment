@@ -6,7 +6,7 @@
 # /classify/images
 # /classify/test
 
-/detection
+/detection/runs
 # /YOLOV8/cleaned
 # /YOLOV8/test
 # /YOLOV8/train

@@ -1,0 +1,7 @@
+train: D:/IntelligentSystem/YOLOV8/train/shuffle+day
+val: D:/IntelligentSystem/YOLOV8/val/val4
+# val: D:/IntelligentSystem/YOLOV8/val/step2
+
+nc: 3
+
+names: ["fall","sit","walk"]
