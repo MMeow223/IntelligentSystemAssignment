@@ -1,0 +1,14 @@
+# /classify/dataset
+# /classify/dataset_backup
+# /classify/fall
+# /classify/walk
+# /classify/sit
+# /classify/images
+# /classify/test
+
+/detection
+# /YOLOV8/cleaned
+# /YOLOV8/test
+# /YOLOV8/train
+# /YOLOV8/upload_here
+# /YOLOV8/val

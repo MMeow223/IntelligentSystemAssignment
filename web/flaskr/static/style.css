@@ -1,0 +1,36 @@
+/* change font  */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #fbfbfb;
+}
+.vertical {
+    border-right: 1px solid gainsboro;
+    left: 50%;
+}
+
+#videoCam{
+    width: auto;
+}
+
+.small-input{
+    width: 50px;
+}
+
+.form_control_custom{
+    padding: 1px !important;
+    display: inline-block !important;
+}
+
+.container {
+    padding: 20px;
+    /* height: 50vh; */
+    /* width: 100vw; */
+}
+
+.video-custom{
+    border-radius: 5px;
+    border: 1px solid gainsboro;
+    width: 642px;
+    height: 482px;
+    background-color: darkgrey;
+}

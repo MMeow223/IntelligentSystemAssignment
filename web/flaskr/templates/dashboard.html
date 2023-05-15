@@ -1,0 +1,176 @@
+<!-- extend from base.html -->
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block page_title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col">
+        <h4>Camera: </h4>
+        <video id="videoCam"></video>
+    </div>
+    <div class="col vertical">
+        <h4>Options: </h4>
+        <!-- button to start camera -->
+        <button id="startbutton" class="btn btn-success">Start Camera</button>
+        <!-- button to stop camera -->
+        <button id="stopbutton" class="btn btn-warning" style="display:none">Stop Camera</button>
+    </div>
+
+
+
+
+    
+    <video autoplay playsinline id="videoElement"></video>
+<canvas id="canvas"  width="400" height="300"></canvas>
+</div>
+
+<div class = 'video'>
+    <img id="photo"  width="400"  height="300">
+    <h1>video</h1>
+</div>
+
+
+
+
+
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script>
+// jquery to start camera
+$(document).ready(function(){
+    $("#startbutton").click(function(){
+
+
+      var socket = io.connect(window.location.protocol + '//' + document.domain + ':' + location.port);
+      socket.on('connect', function(){
+          console.log("Connected...!", socket.connected)
+      });
+
+
+      var canvas = document.getElementById('canvas');
+      var context = canvas.getContext('2d');
+      const video = document.querySelector("#videoElement");
+
+      video.width = 400;
+      video.height = 300; 
+  
+
+      if (navigator.mediaDevices.getUserMedia) {
+          navigator.mediaDevices.getUserMedia({ video: true })
+          .then(function (stream) {
+              video.srcObject = stream;
+              video.play();
+          })
+          .catch(function (err0r) {
+
+          });
+      }
+
+      const FPS = 6;
+      setInterval(() => {
+          width=video.width;
+          height=video.height;
+          context.drawImage(video, 0, 0, width , height );
+          var data = canvas.toDataURL('image/jpeg', 0.5);
+          context.clearRect(0, 0, width,height );
+          socket.emit('image', data);
+      }, 1000/FPS);
+
+      socket.on('response_back', function(image){
+              photo.setAttribute('src', image );
+              
+      });
+
+
+
+        //hide start button
+        $("#startbutton").hide();
+        //show stop button
+        $("#stopbutton").show();
+        let All_mediaDevices=navigator.mediaDevices
+         if (!All_mediaDevices || !All_mediaDevices.getUserMedia) {
+            console.log("getUserMedia() not supported.");
+            return;
+         }
+         All_mediaDevices.getUserMedia({
+            audio: false,
+            video: true
+         })
+         .then(function(vidStream) {
+            var video = document.getElementById('videoCam');
+
+            if ("srcObject" in video) {
+               video.srcObject = vidStream;
+            } else {
+               video.src = window.URL.createObjectURL(vidStream);
+            }
+            video.onloadedmetadata = function(e) {
+               video.play();
+            };
+
+            // pass this video stream to python
+            var canvas = document.createElement('canvas');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            canvas.getContext('2d')
+                  .drawImage(video, 0, 0, canvas.width, canvas.height);
+            var data = canvas.toDataURL('image/png');
+            console.log(data);
+            $.ajax({
+                type: "POST",
+                url: "/",
+                data: {
+                    imgBase64: data
+                }
+            }).done(function(o) {
+                console.log('saved');
+            });
+
+
+
+         })
+         .catch(function(e) {
+            console.log(e.name + ": " + e.message);
+         });
+    });
+
+    // jquery to stop camera
+    $("#stopbutton").click(function(){
+        //hide start show
+        $("#startbutton").show();
+        //show stop hide
+        $("#stopbutton").hide();
+        let All_mediaDevices=navigator.mediaDevices
+         if (!All_mediaDevices || !All_mediaDevices.getUserMedia) {
+            console.log("getUserMedia() not supported.");
+            return;
+         }
+         All_mediaDevices.getUserMedia({
+            audio: true,
+            video: true
+         })
+         .then(function(vidStream) {
+            var video = document.getElementById('videoCam');
+            if ("srcObject" in video) {
+               video.srcObject = vidStream;
+            } else {
+               video.src = window.URL.createObjectURL(vidStream);
+            }
+            video.onloadedmetadata = function(e) {
+               video.pause();
+            };
+         })
+         .catch(function(e) {
+            console.log(e.name + ": " + e.message);
+         });
+    });
+});
+</script>
+
+{% endblock %}

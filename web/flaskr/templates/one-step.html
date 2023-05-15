@@ -1,0 +1,169 @@
+<!-- extend from base.html -->
+{% extends 'base.html' %}
+
+{% block title %}One Step Model{% endblock %}
+
+{% block page_title %}One Step Model{% endblock %}
+
+{% block content %}
+<h1 id="alert_text" style="display:hidden;"><span  class="badge bg-danger">Alert</span></h1>
+<div class="row">
+    <div class="col vertical">
+        <h4>Camera: </h4>
+        <!-- <video id="videoCam"></video> -->
+        <img id="camera" class="video-custom" >
+    </div>
+    <div class="col ">
+        <h4>Options: </h4>
+        <button type="submit" class="btn btn-primary " form="update-setting-form">Update Settings</button>
+        <!-- button to start camera -->
+        <button id="startbutton" class="btn btn-success">Start Camera</button>
+        <!-- button to stop camera -->
+        <button id="stopbutton" class="btn btn-warning" style="display:none">Stop Camera</button>
+        <form id="update-setting-form" action="/settings" method="POST">
+            <div>
+                <div class="row w-25 my-2">
+                    <label class="col" for="conf">Conf</label>
+                    <div class="col">
+                        <input type="range" class="custom-range" id="conf" min="0" max="1" step="0.01" value="{{ confident }}">
+                        <input type="text" id="confValue" name="conf" class="form-control form_control_custom small-input" value="{{ confident }}"/>
+                    </div>
+                </div>
+                <!-- <div class="row w-25 my-2">
+                    <label class="col" for="iou">IOU</label>
+                    <div class="col">
+                        <input type="range" class="custom-range" id="iou" min="0" max="1" step="0.01" value="{{ iou }}">
+                        <input type="text"  id="iouValue" name="iou" class="form-control form_control_custom small-input" value="{{ iou }}"/>
+                    </div>
+                </div> -->
+                <div class="row w-25 my-2">
+                    <label class="col" for="line_thickness">Line Thickness</label>
+                    <div class="col">
+                        <input type="range" class="custom-range" id="line_thickness" min="1" max="10" step="1" value="{{ line_thickness }}">
+                        <input type="text" id="line_thicknessValue" name="line_thickness" class="form-control form_control_custom small-input" value="{{ line_thickness }}"/>
+                    </div>
+                </div>
+                <!-- <div class="row w-25 my-2">
+                    <label class="col" for="show_label">Show Label</label>
+                    <div class="col">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" name="show_label" type="checkbox" role="switch" id="show_label" value="" {{ show_label }}>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script>
+
+
+    function custom_slider(slider_id,value_id,min,max,step,def){
+        // init value
+        $(value_id).val($(slider_id).val());
+                
+        // Scroll to input
+        $(slider_id).bind('mousewheel', function(e){
+            if(e.originalEvent.wheelDelta /120 > 0) {
+                if($(slider_id).val() < max){
+                    var value = Number((parseFloat($(slider_id).val()) + step).toFixed(2));
+                    $(slider_id).val(value);
+                    $(value_id).val(value);
+                }
+            }
+            else{
+                if($(slider_id).val() > min){
+                    var value = Number((parseFloat($(slider_id).val()) - step).toFixed(2));
+                    $(slider_id).val(value);
+                    $(value_id).val(value);
+                }
+            }
+        });
+
+        // Update slider
+        $(slider_id).on("input", function(){
+            $(value_id).val($(this).val());
+        });  
+
+
+        // Update value
+        $(value_id).on("input", function(){
+            var value = $(this).val();
+
+            if(value > max){
+                value = max;
+            }else if(value < min){
+                value = min;
+            }else if(isNaN(value)){
+                value = def;
+            }
+            //show value
+            $(slider_id).val(value);
+            $(value_id).val(value);
+        });  
+    }
+
+    
+
+    // show value using jquery
+    $(document).ready(function(){
+
+
+
+        custom_slider("#conf","#confValue",0,1,0.01,0.25);
+        custom_slider("#iou","#iouValue",0,1,0.01,0.7);
+        custom_slider("#line_thickness","#line_thicknessValue",1,3,1,3);
+        
+        $("#startbutton").click(function(){
+
+            //hide start button
+            $("#startbutton").hide();
+            //show stop button
+            $("#stopbutton").show();
+
+
+            $("#camera").attr("src", "/video_feed_1");
+
+            
+        });
+
+        // loop ajax
+        setInterval(function(){
+            // use ajax to get alert
+            $.ajax({
+                url: "get_step_1_alert",
+                type: "GET",
+                success: function(response){
+                    console.log(response)
+                    if(response["alert"] == "True"){
+                        $("#alert_text").show();
+                    }
+                
+                }
+            }
+            );
+        }, 1000);
+
+        $("#alert_text").click(function(){
+            $("#alert_text").hide();
+        });
+
+    
+        // jquery to stop camera
+        $("#stopbutton").click(function(){
+            //hide start show
+            $("#startbutton").show();
+            //show stop hide
+            $("#stopbutton").hide();
+            //remove image src
+            $("#camera").attr("src", "");
+               
+        });
+
+    });
+</script>
+{% endblock %}
