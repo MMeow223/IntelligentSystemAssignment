@@ -6,8 +6,8 @@ from PIL import Image, ImageDraw,ImageFont
 
 # Initialize the camera
 # camera = cv2.VideoCapture(0)
-model = YOLO('D:/IntelligentSystem/YOLOV8/yolov8m.pt')
-cls_model = YOLO('D:/IntelligentSystem/classify/runs/classify/train18/weights/best.pt')
+model = YOLO('yolov8m.pt')
+cls_model = YOLO('../classify/runs/classify/train18/weights/best.pt')
 
 class_names = ['fall', 'sit', 'walk']
 

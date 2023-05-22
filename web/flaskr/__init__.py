@@ -1,21 +1,13 @@
-import os
 from flask import Flask, render_template, Response, request,redirect,url_for,jsonify
-# from flask_socketio import SocketIO, emit
-
 from ultralytics import YOLO
 import cv2
 import numpy as np
 import os
 from PIL import Image, ImageDraw,ImageFont
-import socket
-import pickle
-import struct
-import imutils
-import threading
 
 
-step2_model = YOLO('D:/IntelligentSystem/YOLOV8/yolov8m.pt')
-cls_model = YOLO('D:/IntelligentSystem/classify/runs/classify/train18/weights/best.pt')
+step2_model = YOLO('yolov8m.pt')
+cls_model = YOLO('../classification.pt')
 
 class_names = ['fall', 'sit', 'walk']
     
@@ -24,7 +16,6 @@ confident = 0.25
 iou = 0.7
 line_thickness = 3
 show_label = True
-# stop_camera = True
 
 step_1_alert = False
 step_2_alert = False
@@ -37,7 +28,7 @@ def create_app(test_config=None):
     
     camera = cv2.VideoCapture(0)
     
-    model = YOLO("D:/IntelligentSystem/YOLOV8/runs/detect/train37/weights/best.pt")
+    model = YOLO("../detection.pt")
     
 
     
@@ -62,8 +53,7 @@ def create_app(test_config=None):
 
     @app.route('/')
     def index():
-        # return "OK"
-        return render_template('dashboard.html',links=get_top_links())
+        return redirect(url_for('one_step'))
     
 
     @app.route('/one-step')
@@ -219,17 +209,11 @@ def create_app(test_config=None):
                 else:
                     step_2_alert = False
                 
-            cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
-            img = draw_text(img,predicted_class)
-        
+                cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
+                img = draw_text(img,predicted_class)
+            
         
         return img
-            # cv2.imshow('Object Detection', img)
-            
-        # if cv2.waitKey(1) == ord("q"):
-        #     break
-
-    # cv2.destroyAllWindows()
 
 
     def detect(frame):
@@ -271,10 +255,5 @@ def create_app(test_config=None):
         global step_2_alert
         results = {'alert': str(step_2_alert)}
         return jsonify(results)
-
-
-
-
-
 
     return app

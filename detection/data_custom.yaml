@@ -1,6 +1,7 @@
-train: D:/IntelligentSystem/YOLOV8/train/shuffle+day
-val: D:/IntelligentSystem/YOLOV8/val/val4
-# val: D:/IntelligentSystem/YOLOV8/val/step2
+path: D:\IntelligentSystem\IntelligentSystemAssignment\detection\dataset
+train: train
+val: val
+test:  test
 
 nc: 3
 

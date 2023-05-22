@@ -13,4 +13,4 @@
 # /YOLOV8/upload_here
 # /YOLOV8/val
 
-*.pt
+# *.pt
