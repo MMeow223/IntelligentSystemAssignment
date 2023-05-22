@@ -68,7 +68,7 @@ The file for training Object Detection Model of One-Step Model is ready in ```/d
 ###### Open the terminal from the repository directory and paste the commands below. 
 ```
 cd detection
-python train.py
+python test.py
 ```
 
 ## **Evaluate Image Classification Model**
@@ -76,7 +76,7 @@ The file for training Object Detection Model of One-Step Model is ready in ```/c
 ###### Open the terminal from the repository directory and paste the commands below. 
 ```
 cd classify
-python train.py
+python test.py
 ```
 
 ## **Live Predict One-Step Model**
