@@ -13,6 +13,65 @@ This is a repository for the  ***COS30018 Intelligent System*** Assignment. The 
 # **Installation Instruction for YOLOv5**
 
 
+##### **Train Model**
+[1. Train Object Detection Model](#train-object-detection-model) <br>
+
+##### **Evaluate Model**
+[1. Evaluate Object Detection Model](#evaluate-object-detection-model) <br>
+
+##### **Live Predict with Model**
+[1. Live Predict One-Step Model](#live-predict-one-step-model) <br>
+
+## Setup
+Before starting to run train, test, live prediction, you need to perform the step below.
+### 1. Clone this repository
+You can clone this repository by using the command below.
+###### Open a terminal and paste the command below
+`git clone https://github.com/MMeow223/IntelligentSystemAssignment.git`
+
+### 2. Install packages
+Assuming you have anaconda installed on your device. You will need to create an new anaconda environment and install required packages with the following command.
+*Make sure to change the directory to yolov5 in the terminal
+`cd yolov5`
+###### Open a terminal and paste the command below
+`conda create -n is_env python=3.9`
+###### Activate the anaconda environment
+`conda activate is_env`
+###### Install required packages
+`pip install -r requirements.txt`
+
+### 3. Update the dataset directory
+The dataset directory has already been set to `./dataset` by default for train, val and test.
+
+If changes were to be made to the directory of the dataset, you can change it by opening the file and change the path to the dataset directory in your device.
+
+###### In data/coco128.yaml
+1. Change the line `train: ./dataset/train`, `val: ./dataset/val` or `test: ./dataset/test`to the changed path of your own device
+
+Now, your dataset are ready.
+
+## **Train Object Detection Model**
+The example below uses yolov5m pre-trained check point, but you can change it to other v5 model such as `yolov5n`,`yolov5s` and etc.
+To change the Hyperparameters such as Learning rate, it can be change in `data/hyps/hyp.scratch-low` file along with with other parameters.
+###### Open the terminal,make sure the directory is yolov5 and paste the commands below. 
+```
+python train.py --img 640 --epochs 100 --data coco128.yaml --weights yolov5m.pt
+```
+
+## **Evaluate Object Detection Model**
+To evaluate different model, you can change the `exp` in `--weights runs/train/exp/weights/best.pt` to other `exp` file.
+###### Open the terminal,make sure the directory is yolov5 and paste the commands below. 
+```
+python val.py --weights runs/train/exp/weights/best.pt --data coco128.yaml --img 640 --half --task test
+```
+
+## **Live Predict One-Step Model**
+To do live predict with different model, you can change the `exp` in `--weights runs/train/exp/weights/best.pt` to other `exp` file. `--source 0` indicates using web-cam.
+###### Open the terminal,make sure the directory is yolov5 and paste the commands below. 
+```
+python detect.py --weights runs/train/exp/weights/best.pt --source 0
+```
+
 # **Installation Instruction for YOLOv8**
 
 ##### **Train Model**
