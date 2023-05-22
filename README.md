@@ -1,4 +1,7 @@
-# **Instruction**
+# Automated Fall Detection System
+This is a repository for the  ***COS30018 Intelligent System*** Assignment. The project is about building an automated fall detection system using two approach, One-Step and Two-Step approach.
+
+## **Installation Instruction**
 
 ##### **Train Model**
 [1. Train Object Detection Model](#train-object-detection-model) <br>
