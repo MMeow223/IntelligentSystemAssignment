@@ -14,13 +14,13 @@ This is a repository for the  ***COS30018 Intelligent System*** Assignment. The 
 
 
 ##### **Train Model**
-[1. Train Object Detection Model](#train-object-detection-model(yolov5)) <br>
+[1. Train Object Detection Model](#train-object-detection-modelyolov5) <br>
 
 ##### **Evaluate Model**
-[1. Evaluate Object Detection Model](#evaluate-object-detection-model(yolov5)) <br>
+[1. Evaluate Object Detection Model](#evaluate-object-detection-modelyolov5) <br>
 
 ##### **Live Predict with Model**
-[1. Live Predict One-Step Model](#live-predict-one-step-model(yolov5)) <br>
+[1. Live Predict One-Step Model](#live-predict-one-step-modelyolov5) <br>
 
 ## Setup
 Before starting to run train, test, live prediction, you need to perform the step below.
