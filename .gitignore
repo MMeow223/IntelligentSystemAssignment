@@ -6,9 +6,11 @@
 # /classify/images
 # /classify/test
 
-/detection/runs
+# /detection/runs
 # /YOLOV8/cleaned
 # /YOLOV8/test
 # /YOLOV8/train
 # /YOLOV8/upload_here
 # /YOLOV8/val
+
+*.pt
