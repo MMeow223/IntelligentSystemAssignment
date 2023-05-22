@@ -1,24 +1,24 @@
-#**Instruction**
+# **Instruction**
 <hr>
-#####**Train Model**
+##### **Train Model**
 [1. Train Object Detection Model](#train-object-detection-model)
 [2. Train Image Classification Model](#train-image-classification-model)
 
-#####**Evaluate Model**
+##### **Evaluate Model**
 [1. Evaluate Object Detection Model](#evaluate-object-detection-model)
 [2. Evaluate Image Classification Model](#evaluate-image-classification-model)
 
-#####**Live Predict with Model**
+##### **Live Predict with Model**
 [1. Live Predict One-Step Model](#live-predict-one-step-model)
 [2. Live Predict Two-Step Model](#live-predict-two-step-model)
 
-##Setup
+## Setup
 Before starting to run train, test, live prediction, and web application, you need to perform the step below.
-###1.Install packages
+### 1.Install packages
 Assuming you have anaconda installed on your device. You will need to create an new anaconda environment with the following command.
-######Open a terminal from the repository directory and paste the command below
+###### Open a terminal from the repository directory and paste the command below
 `conda create --name is_env --file requirements.txt`
-######Activate the anaconda environment
+###### Activate the anaconda environment
 `conda activate is_env
 Your environment is ready now.
 ###2. Download Dataset from Google Drive
@@ -36,7 +36,7 @@ cd detection
 python train.py
 ```
 
-##**Train Image Classification Model**
+## **Train Image Classification Model**
 The file for training Object Detection Model of One-Step Model is ready in ```/classify/train.py```. By default, it will use the yolov8m-cls pre-trained check point, but you can change it to any other yolo models as you like.
 ######Open the terminal from the repository directory and paste the commands below. 
 ```
@@ -44,27 +44,27 @@ cd classify
 python train.py
 ```
 
-##**Evaluate Object Detection Model**
+## **Evaluate Object Detection Model**
 The file for training Object Detection Model of One-Step Model is ready in ```/detection/test.py```. By default, it will use the yolov8m-cls pre-trained check point, but you can change it to any other yolo models as you like.
-######Open the terminal from the repository directory and paste the commands below. 
+###### Open the terminal from the repository directory and paste the commands below. 
 ```
 cd detection
 python train.py
 ```
 
-##**Evaluate Image Classification Model**
+## **Evaluate Image Classification Model**
 ```
 cd detection
 python train.py
 ```
 
-##**Live Predict One-Step Model**
+## **Live Predict One-Step Model**
 ```
 cd detection
 python train.py
 ```
 
-##**Live Predict Two-Step Model**
+## **Live Predict Two-Step Model**
 ```
 cd detection
 python train.py
