@@ -1,7 +1,19 @@
 # Automated Fall Detection System
 This is a repository for the  ***COS30018 Intelligent System*** Assignment. The project is about building an automated fall detection system using two approach, One-Step and Two-Step approach.
 
-## **Installation Instruction**
+# **Instruction for Custom CNN Model**
+1. The Custom CNN Classification model can be trained and tested in the google colab.
+
+|                 | URL                                                                                                                                                           |
+|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Google Drive    | [https://drive.google.com/drive/u/0/folders/1Eo_hgHU0jV9p8iKSjPvWsNU_0mIQlgED](#https://drive.google.com/drive/u/0/folders/1Eo_hgHU0jV9p8iKSjPvWsNU_0mIQlgED) |
+| Python Notebook | [https://colab.research.google.com/drive/1ZQpeDb0ca8KJH77eLzCfHTPm6OrhYhL1](#https://colab.research.google.com/drive/1ZQpeDb0ca8KJH77eLzCfHTPm6OrhYhL1)       |
+
+
+# **Installation Instruction for YOLOv5**
+
+
+# **Installation Instruction for YOLOv8**
 
 ##### **Train Model**
 [1. Train Object Detection Model](#train-object-detection-model) <br>
