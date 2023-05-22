@@ -14,13 +14,13 @@ This is a repository for the  ***COS30018 Intelligent System*** Assignment. The 
 
 
 ##### **Train Model**
-[1. Train Object Detection Model](#train-object-detection-model) <br>
+[1. Train Object Detection Model](#train-object-detection-model(YOLOv5)) <br>
 
 ##### **Evaluate Model**
-[1. Evaluate Object Detection Model](#evaluate-object-detection-model) <br>
+[1. Evaluate Object Detection Model](#evaluate-object-detection-model(YOLOv5)) <br>
 
 ##### **Live Predict with Model**
-[1. Live Predict One-Step Model](#live-predict-one-step-model) <br>
+[1. Live Predict One-Step Model](#live-predict-one-step-model(YOLOv5)) <br>
 
 ## Setup
 Before starting to run train, test, live prediction, you need to perform the step below.
@@ -50,7 +50,7 @@ If changes were to be made to the directory of the dataset, you can change it by
 
 Now, your dataset are ready.
 
-## **Train Object Detection Model**
+## **Train Object Detection Model(YOLOv5)**
 The example below uses yolov5m pre-trained check point, but you can change it to other v5 model such as `yolov5n`,`yolov5s` and etc.
 To change the Hyperparameters such as Learning rate, it can be change in `data/hyps/hyp.scratch-low` file along with with other parameters.
 ###### Open the terminal,make sure the directory is yolov5 and paste the commands below. 
@@ -58,14 +58,14 @@ To change the Hyperparameters such as Learning rate, it can be change in `data/h
 python train.py --img 640 --epochs 100 --data coco128.yaml --weights yolov5m.pt
 ```
 
-## **Evaluate Object Detection Model**
+## **Evaluate Object Detection Model(YOLOv5)**
 To evaluate different model, you can change the `exp` in `--weights runs/train/exp/weights/best.pt` to other `exp` file.
 ###### Open the terminal,make sure the directory is yolov5 and paste the commands below. 
 ```
 python val.py --weights runs/train/exp/weights/best.pt --data coco128.yaml --img 640 --half --task test
 ```
 
-## **Live Predict One-Step Model**
+## **Live Predict One-Step Model(YOLOv5)**
 To do live predict with different model, you can change the `exp` in `--weights runs/train/exp/weights/best.pt` to other `exp` file. `--source 0` indicates using web-cam.
 ###### Open the terminal,make sure the directory is yolov5 and paste the commands below. 
 ```
